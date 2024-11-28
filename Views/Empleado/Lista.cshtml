@@ -24,7 +24,9 @@
                         <td>@item.Correo</td>
                         <td>@item.FechaContrato.ToString("dd/MM/yyyy")</td>
                         <td>@(item.Estado ? "SI" : "NO")</td>
-                        <td>
+                        <td class="d-flex">
+                            <a asp-controller="Empleado" asp-action="Editar" class="btn btn-primary me-2" asp-route-Id="@item.IdEmpleado">Editar</a>
+                            <a asp-controller="Empleado" asp-action="Eliminar" class="btn btn-danger" asp-route-Id="@item.IdEmpleado" onclick="return confirmar()">Eliminar</a>
                         </td>
                     </tr>
                 }
@@ -34,3 +36,12 @@
     </div>
 
 </div>
+
+@section Scripts{
+    <script>
+        function confirmar()
+        {
+            return confirm("¿Desea Eliminar Empleado Seleccionado?")
+        }
+    </script>
+}

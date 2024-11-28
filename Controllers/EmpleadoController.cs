@@ -37,5 +37,31 @@ namespace MvcEmpleados.Controllers
             return RedirectToAction(nameof(Lista));
         }
 
+        [HttpGet]
+
+        public async Task <IActionResult> Editar(int Id)
+        {
+            Empleado empleado = await _appDbContext.Empleados.FirstAsync(e => e.IdEmpleado == Id);
+            return View(empleado);
+        }
+
+         [HttpPost]
+        public async Task<IActionResult> Editar(Empleado empleado)
+        {
+            _appDbContext.Empleados.Update(empleado);
+            await _appDbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Lista));
+        }
+
+        [HttpGet]
+
+        public async Task <IActionResult> Eliminar(int Id)
+        {
+            Empleado empleado = await _appDbContext.Empleados.FirstAsync(e => e.IdEmpleado == Id);
+             _appDbContext.Empleados.Remove(empleado);
+             await _appDbContext.SaveChangesAsync();
+             return RedirectToAction(nameof(Lista));
+        }
+
     }
 }
